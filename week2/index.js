@@ -179,15 +179,15 @@ let performanceData = {
 
 // 練習：第一位教練（可將下方程式碼註解移除，完成答題）
 
-// if (/* 判斷邏輯，使其為 true */) {
-//   // 請填寫第一位教練業績增長程式碼，使用 +=
-// }
+if (performanceData.coaches[0].performance < 50000) {
+  performanceData.coaches[0].performance += (50000 - performanceData.coaches[0].performance);
+}
 
 // 練習：第二位教練（可將下方程式碼註解移除，完成答題）
 
-// if (/* 判斷邏輯，使其為 true */) {
-//   // 請填寫第二位教練業績增長程式碼，使用 +=
-// }
+if (performanceData.coaches[1].performance < 50000) {
+  performanceData.coaches[1].performance += (50000 - performanceData.coaches[1].performance);
+}
 
 console.log(performanceData);
 
@@ -198,7 +198,17 @@ console.log(performanceData);
   - 瑜伽每分鐘消耗 5 卡
   - 騎腳踏車每分鐘消耗 8 卡
 */
-const activities = {}; // 練習：使用 `物件包含物件` 的格式定義運動類型與每分鐘消耗卡路里
+const activities = {
+  running: {
+    caloriesPerMinute: 10,
+  },
+  yoga: {
+    caloriesPerMinute: 5,
+  },
+  cycling: {
+    caloriesPerMinute: 8,
+  },
+}; // 練習：使用 `物件包含物件` 的格式定義運動類型與每分鐘消耗卡路里
 
 // ## 題目九
 // 情境：算小明今天的卡路里消耗
@@ -208,7 +218,7 @@ const activities = {}; // 練習：使用 `物件包含物件` 的格式定義�
 let calorieBurn = 0;
 
 // 練習：計算小明今日消耗的卡路里
-
+calorieBurn = activities.cycling.caloriesPerMinute * 10 + activities.running.caloriesPerMinute * 30 + activities.yoga.caloriesPerMinute * 40 + activities.cycling.caloriesPerMinute * 10;
 console.log(`小明今日一共消耗約 ${calorieBurn} 卡路里。`);
 
 // ### 10. 運動量是否達標！
@@ -235,14 +245,19 @@ const exerciseRecords = [
 ];
 
 // 範例：週一
-if (exerciseRecords[0].duration >= 30 && exerciseRecords[0].heartRate >= 130) {
-  totalDuration += mondayDuration;
-  validDays += 1;
-}
+// if (exerciseRecords[0].duration >= 30 && exerciseRecords[0].heartRate >= 130) {
+//   totalDuration += mondayDuration;
+//   validDays += 1;
+// }
 
 // 練習：週二、週三、週四、週五、週六
-
+exerciseRecords.forEach((record) => {
+  if (record.duration >= 30 && record.heartRate >= 130) {
+    totalDuration += record.duration;
+    validDays += 1;
+  }
+});
 // 練習：判斷是否符合 533 原則
-let isCompliant; // 條件：運動次數至少 5 次 || 運動時間累績達標 >= 150;
+let isCompliant = (validDays >= 5 || totalDuration >= 150) ? '是' : '否'; // 條件：運動次數至少 5 次 || 運動時間累績達標 >= 150;
 
 console.log(`小明的運動量是否達標: ${isCompliant}`); // 輸出: 小明的運動量是否達標
