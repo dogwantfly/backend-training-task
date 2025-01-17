@@ -3,7 +3,7 @@
 // 若不確定答案，可將 code 貼在 chrome console 顯示後，再回頭補知識點。
 let a = 9;
 let b = 13;
-console.log(a > 0); // true 
+console.log(a > 0); // true
 console.log(b > a); // true
 console.log(a + b > 1); // true
 let c = 51;
@@ -26,7 +26,7 @@ console.log(g * h === 64); // true
 
 let i = '9';
 let j = '9';
-console.log(i + j == 99); // true  
+console.log(i + j == 99); // true
 console.log(i + j === '99'); // true
 console.log(i + j === 99); // false
 
@@ -50,9 +50,10 @@ let BobIsVip = false; /* Bob 是否為 VIP */
 
 // 練習：（可自行將下方程式碼的註解刪除，完成答題）
 if (BobPrice >= giftPriceRule || BobIsVip) {
-  console.log("客戶您好，您有符合贈品資格");
+  giftNum--;
+  console.log('客戶您好，您有符合贈品資格');
 } else {
-  console.log("客戶您好，您沒有符合贈品資格");
+  console.log('客戶您好，您沒有符合贈品資格');
 }
 
 console.log(`贈品還剩下${giftNum}個`);
@@ -72,7 +73,13 @@ let baseBonus = 6000; // 基本獎金
 let coachBonus = baseBonus; // 教練業績獎金帳單，並已加入條件一基本獎金
 
 // 練習：計算教練業績獎金
-coachBonus += coachIncome * 0.15;
+if (coachIncome <= 100000) {
+  coachBonus += coachIncome * 0.1;
+} else if (coachIncome <= 300000) {
+  coachBonus += coachIncome * 0.15;
+} else {
+  coachBonus += coachIncome * 0.2;
+}
 console.log(`小明總共需支付 $${coachBonus} 獎金`);
 
 // ### 題目五：剪刀石頭布
@@ -82,11 +89,19 @@ console.log(`小明總共需支付 $${coachBonus} 獎金`);
 
 let playerA = '剪刀';
 let playerB = '剪刀';
-if ((playerA === '剪刀' && playerB === '剪刀') || (playerA === '石頭' && playerB === '石頭') || (playerA === '布' && playerB === '布')) {
+if (playerA === playerB) {
   console.log('平手');
-} else if ((playerA === '剪刀' && playerB === '石頭') || (playerA === '石頭' && playerB === '布') || (playerA === '布' && playerB === '剪刀')) {
+} else if (
+  (playerA === '剪刀' && playerB === '石頭') ||
+  (playerA === '石頭' && playerB === '布') ||
+  (playerA === '布' && playerB === '剪刀')
+) {
   console.log('玩家A贏');
-} else if ((playerA === '石頭' && playerB === '剪刀') || (playerA === '布' && playerB === '石頭') || (playerA === '剪刀' && playerB === '布')) {
+} else if (
+  (playerA === '石頭' && playerB === '剪刀') ||
+  (playerA === '布' && playerB === '石頭') ||
+  (playerA === '剪刀' && playerB === '布')
+) {
   console.log('玩家B贏');
 } else {
   console.log('輸入錯誤');
@@ -114,48 +129,55 @@ if ((playerA === '剪刀' && playerB === '剪刀') || (playerA === '石頭' && p
 - 是否接收新學員：否
 */
 
-const gymCoach = [
-  {
-    name: '王教練',
-    specialty: ['力量訓練', '減重課程'],
-    course: [
-      {
-        type: '個人訓練課程',
-        price: 2000,
-        duration: 60,
-        isAvailable: true,
-      },
-      {
-        type: '團體訓練課程',
-        price: 1500,
-        duration: 90,
-        isAvailable: false,
-      }
-    ],
-    introduction: '王教練擁有 5 年教學經驗，專精於提升學員的肌力與減脂，適合希望快速達成體能目標的學員。',  
-    isAcceptingNewStudents: true,
-  },
-  {
-    name: '李教練',
-    specialty: ['瑜伽', '體態雕塑'],
-    course: [
-      {
-        type: '個人訓練課程',
-        price: 1800,
-        duration: 50,
-        isAvailable: false,
-      },
-      {
-        type: '團體訓練課程',
-        price: 1200,
-        duration: 75,
-        isAvailable: true,
-      } 
-    ],
-    introduction: '李教練是一位瑜伽大師，擁有 10 年教學經驗，擅長幫助學員雕塑完美體態，適合希望改善姿態與柔軟度的學員。',
-    isAcceptingNewStudents: false,
-  }
-]; // 練習：使用物件變數定義兩位教練的資訊
+const gymCoach = {
+  gymName: '高雄市健身教練聯盟',
+  location: '高雄市',
+  description: '專注於提供高品質的健身指導服務',
+  coaches: [
+    {
+      name: '王教練',
+      specialty: ['力量訓練', '減重課程'],
+      course: [
+        {
+          type: '個人訓練課程',
+          price: 2000,
+          duration: 60,
+          isAvailable: true,
+        },
+        {
+          type: '團體訓練課程',
+          price: 1500,
+          duration: 90,
+          isAvailable: false,
+        },
+      ],
+      introduction:
+        '王教練擁有 5 年教學經驗，專精於提升學員的肌力與減脂，適合希望快速達成體能目標的學員。',
+      isAcceptingNewStudents: true,
+    },
+    {
+      name: '李教練',
+      specialty: ['瑜伽', '體態雕塑'],
+      course: [
+        {
+          type: '個人訓練課程',
+          price: 1800,
+          duration: 50,
+          isAvailable: false,
+        },
+        {
+          type: '團體訓練課程',
+          price: 1200,
+          duration: 75,
+          isAvailable: true,
+        },
+      ],
+      introduction:
+        '李教練是一位瑜伽大師，擁有 10 年教學經驗，擅長幫助學員雕塑完美體態，適合希望改善姿態與柔軟度的學員。',
+      isAcceptingNewStudents: false,
+    },
+  ],
+}; // 練習：使用物件變數定義兩位教練的資訊
 
 console.log(gymCoach);
 
@@ -180,13 +202,15 @@ let performanceData = {
 // 練習：第一位教練（可將下方程式碼註解移除，完成答題）
 
 if (performanceData.coaches[0].performance < 50000) {
-  performanceData.coaches[0].performance += (50000 - performanceData.coaches[0].performance);
+  performanceData.coaches[0].performance +=
+    50000 - performanceData.coaches[0].performance;
 }
 
 // 練習：第二位教練（可將下方程式碼註解移除，完成答題）
 
 if (performanceData.coaches[1].performance < 50000) {
-  performanceData.coaches[1].performance += (50000 - performanceData.coaches[1].performance);
+  performanceData.coaches[1].performance +=
+    50000 - performanceData.coaches[1].performance;
 }
 
 console.log(performanceData);
@@ -218,7 +242,11 @@ const activities = {
 let calorieBurn = 0;
 
 // 練習：計算小明今日消耗的卡路里
-calorieBurn = activities.cycling.caloriesPerMinute * 10 + activities.running.caloriesPerMinute * 30 + activities.yoga.caloriesPerMinute * 40 + activities.cycling.caloriesPerMinute * 10;
+calorieBurn =
+  activities.cycling.caloriesPerMinute * 10 +
+  activities.running.caloriesPerMinute * 30 +
+  activities.yoga.caloriesPerMinute * 40 +
+  activities.cycling.caloriesPerMinute * 10;
 console.log(`小明今日一共消耗約 ${calorieBurn} 卡路里。`);
 
 // ### 10. 運動量是否達標！
@@ -258,6 +286,6 @@ exerciseRecords.forEach((record) => {
   }
 });
 // 練習：判斷是否符合 533 原則
-let isCompliant = (validDays >= 5 || totalDuration >= 150) ? '是' : '否'; // 條件：運動次數至少 5 次 || 運動時間累績達標 >= 150;
+let isCompliant = validDays >= 5 || totalDuration >= 150 ? '是' : '否'; // 條件：運動次數至少 5 次 || 運動時間累績達標 >= 150;
 
 console.log(`小明的運動量是否達標: ${isCompliant}`); // 輸出: 小明的運動量是否達標
